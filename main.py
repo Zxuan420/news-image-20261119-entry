@@ -251,23 +251,29 @@ def main():
     for fx in [250, 512, 774]:
         canvas.fill_rect(fx, 180, 3, 136, (100, 100, 100))
     # Flags
-    # Flag 1: Red, White, Blue
-    canvas.fill_rect(253, 182, 35, 12, (200, 50, 50))
-    canvas.fill_rect(253, 194, 35, 12, WHITE)
-    canvas.fill_rect(253, 206, 35, 12, (50, 50, 200))
-    # Flag 2: Red
-    canvas.fill_rect(515, 182, 35, 24, (200, 50, 50))
-    # Flag 3: Blue, White, Red
-    canvas.fill_rect(777, 182, 35, 12, (50, 50, 200))
-    canvas.fill_rect(777, 194, 35, 12, WHITE)
+    # Flag 1: USA (red/white stripes with blue canton)
+    for i in range(6):
+        sy = 182 + i * 6
+        sc = (200, 50, 50) if i % 2 == 0 else WHITE
+        canvas.fill_rect(253, sy, 35, 6, sc)
+    canvas.fill_rect(253, 182, 16, 18, (50, 50, 200))
+
+    # Flag 2: China (solid red with gold star)
+    canvas.fill_rect(515, 182, 35, 36, (200, 50, 50))
+    canvas.fill_circle(525, 194, 4, GOLD)
+
+    # Flag 3: Russia (white, blue, red)
+    canvas.fill_rect(777, 182, 35, 12, WHITE)
+    canvas.fill_rect(777, 194, 35, 12, (50, 50, 200))
     canvas.fill_rect(777, 206, 35, 12, (200, 50, 50))
 
     # Table & three suited figures in front (table y=280..316, x=280..744)
     canvas.fill_rect(280, 280, 464, 36, (35, 25, 18))
-    # Three seated figures (heads at y=250, bodies at y=265..280)
+    # Three seated figures (heads at y=252, bodies at y=262..280 with white shirt triangle)
     for c_x in [350, 512, 674]:
         canvas.fill_circle(c_x, 252, 10, (232, 195, 158)) # head
         canvas.fill_rect(c_x - 16, 262, 32, 18, (25, 30, 45)) # suit
+        canvas.fill_polygon([(c_x - 4, 262), (c_x + 4, 262), (c_x, 270)], WHITE)
 
     # Hero caption bar (y=316..356)
     canvas.fill_rect(16, 316, 992, 40, NAVY)
